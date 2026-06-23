@@ -1,0 +1,10 @@
+Run {
+    Survivor: JohnRiskOfRain
+    Difficulty: Monsoon
+    Time: 25
+    Stage: 5
+    Artifacts: [Swarms, Command]
+    Items {
+        5x LensMakersGlasses
+    }
+}

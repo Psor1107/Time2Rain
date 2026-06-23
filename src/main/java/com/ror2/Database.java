@@ -1,5 +1,7 @@
 package com.ror2;
 
+import java.util.List;
+
 public final class Database {
     public enum Survivor {
         Commando(12.0),
@@ -33,9 +35,14 @@ public final class Database {
     }
 
     public enum Enemy {
+        LesserWisp(35),
         Beetle(80),
-        Lemurian(120),
-        Golem(480);
+        Lemurian(80),
+        Imp(140),
+        Golem(480),
+        GreaterWisp(500),
+        ElderLemurian(900),
+        Parent(900);
 
         private final int baseHp;
 
@@ -49,12 +56,28 @@ public final class Database {
     }
 
     public enum Item {
-        SoldierSyringe,
-        LensMakersGlasses,
-        BrilliantBehemoth;
+        LensMakersGlasses("LensMakersGlasses"),
+        AtGMissileMk1("AtGMissileMk1"),
+        LeafClover("LeafClover"),
+        ExecutiveCard("ExecutiveCard");
+
+        private final String displayName;
+
+        Item(String displayName) {
+            this.displayName = displayName;
+        }
+
+        public String getDisplayName() {
+            return displayName;
+        }
 
         public boolean isEquipment() {
-            return this == BrilliantBehemoth;
+            return this == ExecutiveCard;
+        }
+
+        @Override
+        public String toString() {
+            return displayName;
         }
     }
 
@@ -78,7 +101,7 @@ public final class Database {
 
     public static boolean isValidItem(String name) {
         for (Item item : Item.values()) {
-            if (item.name().equalsIgnoreCase(name)) {
+            if (item.getDisplayName().equalsIgnoreCase(name)) {
                 return true;
             }
         }
@@ -109,10 +132,22 @@ public final class Database {
 
     public static Item toItem(String name) {
         for (Item item : Item.values()) {
-            if (item.name().equalsIgnoreCase(name)) {
+            if (item.getDisplayName().equalsIgnoreCase(name)) {
                 return item;
             }
         }
         throw new IllegalArgumentException("Item inválido: " + name);
+    }
+
+    public static List<Enemy> getEnemiesForStage(int stage) {
+        int cycle = ((stage - 1) % 5) + 1;
+        return switch (cycle) {
+            case 1 -> List.of(Enemy.Beetle, Enemy.Lemurian, Enemy.Golem);
+            case 2 -> List.of(Enemy.Golem, Enemy.Lemurian, Enemy.LesserWisp);
+            case 3 -> List.of(Enemy.Lemurian, Enemy.LesserWisp, Enemy.Imp);
+            case 4 -> List.of(Enemy.Imp, Enemy.ElderLemurian, Enemy.GreaterWisp);
+            case 5 -> List.of(Enemy.ElderLemurian, Enemy.GreaterWisp, Enemy.Parent);
+            default -> List.of(Enemy.Beetle, Enemy.Lemurian, Enemy.Golem);
+        };
     }
 }

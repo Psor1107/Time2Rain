@@ -34,7 +34,7 @@
                                 <argument>-package</argument>
                                 <argument>com.ror2.parser</argument>
                             </arguments>
-                            <outputDirectory>${project.build.directory}/generated-sources/antlr4</outputDirectory>
+                            <outputDirectory>${project.build.directory}/generated-sources/antlr4/com/ror2/parser</outputDirectory>
                             <sourceDirectory>${project.basedir}/src/main/antlr4</sourceDirectory>
                             <addOutputDirectory>true</addOutputDirectory>
                         </configuration>
@@ -49,9 +49,6 @@
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target>
                     <encoding>${project.build.sourceEncoding}</encoding>
-                    <compilerArgs>
-                        <arg>--enable-preview</arg>
-                    </compilerArgs>
                 </configuration>
             </plugin>
             <plugin>

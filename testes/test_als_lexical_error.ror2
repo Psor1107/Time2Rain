@@ -1,0 +1,10 @@
+Run {
+    Survivor: Commando!
+    Difficulty: Monsoon
+    Time: 25
+    Stage: 5
+    Artifacts: [Swarms, Command]
+    Items {
+        3x AtGMissileMk1
+    }
+}

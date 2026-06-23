@@ -12,6 +12,7 @@ import com.ror2.parser.RoR2Parser;
 
 public class SemanticVisitor extends RoR2BaseVisitor<Void> {
     private final List<String> errors = new ArrayList<>();
+    private final List<String> warnings = new ArrayList<>();
     private final Set<String> artifacts = new HashSet<>();
     private final Map<String, Integer> items = new HashMap<>();
     private int equipmentCount = 0;
@@ -20,6 +21,10 @@ public class SemanticVisitor extends RoR2BaseVisitor<Void> {
 
     public List<String> getErrors() {
         return errors;
+    }
+
+    public List<String> getWarnings() {
+        return warnings;
     }
 
     public String getSurvivorName() {
@@ -82,9 +87,18 @@ public class SemanticVisitor extends RoR2BaseVisitor<Void> {
         if (!Database.isValidItem(name)) {
             errors.add("Erro Semântico: Item não reconhecido - " + name);
         } else {
-            items.merge(name, amount, Integer::sum);
-            if (Database.toItem(name).isEquipment()) {
+            int currentAmount = items.getOrDefault(name, 0) + amount;
+            items.put(name, currentAmount);
+
+            Database.Item item = Database.toItem(name);
+            if (item.isEquipment()) {
                 equipmentCount += amount;
+            }
+            if (item == Database.Item.LensMakersGlasses && currentAmount > 10) {
+                String warning = "Aviso Semântico: LensMakersGlasses acima de 10 itens tem bônus limitado a 100%.";
+                if (!warnings.contains(warning)) {
+                    warnings.add(warning);
+                }
             }
         }
         return null;
@@ -103,7 +117,7 @@ public class SemanticVisitor extends RoR2BaseVisitor<Void> {
         if (items.values().stream().mapToInt(Integer::intValue).sum() == 0) {
             errors.add("Erro Semântico: Run deve conter pelo menos um item");
         }
-        if (items.keySet().stream().filter(item -> Database.toItem(item).isEquipment()).count() > 1) {
+        if (equipmentCount > 1) {
             errors.add("Erro Semântico: Apenas 1 item do tipo Equipamento é permitido");
         }
         return null;

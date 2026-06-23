@@ -1,28 +1,24 @@
 package com.ror2;
 
-import com.ror2.parser.RoR2Lexer;
-import com.ror2.parser.RoR2Parser;
-import org.antlr.v4.runtime.CharStreams;
-import org.antlr.v4.runtime.CommonTokenStream;
-import org.antlr.v4.runtime.ConsoleErrorListener;
-import org.antlr.v4.runtime.ParserRuleContext;
-import org.antlr.v4.runtime.RecognitionException;
-import org.antlr.v4.runtime.Recognizer;
-import org.antlr.v4.runtime.TokenStream;
-import org.antlr.v4.runtime.misc.ParseCancellationException;
-import org.antlr.v4.runtime.tree.ErrorNode;
-import org.antlr.v4.runtime.tree.ParseTree;
-import org.antlr.v4.runtime.tree.ParseTreeWalker;
-import org.antlr.v4.runtime.CharStream;
-import org.antlr.v4.runtime.ANTLRErrorStrategy;
-import org.antlr.v4.runtime.BailErrorStrategy;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.antlr.v4.runtime.BailErrorStrategy;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.ConsoleErrorListener;
+import org.antlr.v4.runtime.RecognitionException;
+import org.antlr.v4.runtime.Recognizer;
+import org.antlr.v4.runtime.misc.ParseCancellationException;
+import org.antlr.v4.runtime.tree.ParseTree;
+
+import com.ror2.parser.RoR2Lexer;
+import com.ror2.parser.RoR2Parser;
 
 public class App {
     public static void main(String[] args) {
@@ -60,6 +56,10 @@ public class App {
                 if (!semanticVisitor.getErrors().isEmpty()) {
                     semanticVisitor.getErrors().forEach(writer::println);
                     return;
+                }
+                if (!semanticVisitor.getWarnings().isEmpty()) {
+                    semanticVisitor.getWarnings().forEach(writer::println);
+                    writer.println();
                 }
 
                 InterpreterVisitor interpreter = new InterpreterVisitor(semanticVisitor.getArtifacts());

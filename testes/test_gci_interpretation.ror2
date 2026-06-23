@@ -1,0 +1,11 @@
+Run {
+    Survivor: Huntress
+    Difficulty: Rainstorm
+    Time: 20
+    Stage: 3
+    Artifacts: [Command]
+    Items {
+        5x LensMakersGlasses
+        2x AtGMissileMk1
+    }
+}

@@ -1,13 +1,13 @@
 package com.ror2;
 
-import com.ror2.parser.RoR2BaseVisitor;
-import com.ror2.parser.RoR2Parser;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import com.ror2.parser.RoR2BaseVisitor;
+import com.ror2.parser.RoR2Parser;
 
 public class InterpreterVisitor extends RoR2BaseVisitor<String> {
     private String survivorName;
@@ -61,10 +61,14 @@ public class InterpreterVisitor extends RoR2BaseVisitor<String> {
         Database.Difficulty difficulty = Database.toDifficulty(difficultyName);
 
         double baseDps = survivor.getBaseDps();
-        double syringeMultiplier = 1.0 + items.getOrDefault("SoldierSyringe", 0) * 0.15;
-        double glassesMultiplier = 1.0 + items.getOrDefault("LensMakersGlasses", 0) * 0.10;
-        double behemothMultiplier = items.containsKey("BrilliantBehemoth") ? 1.6 : 1.0;
-        double playerDps = baseDps * syringeMultiplier * glassesMultiplier * behemothMultiplier;
+        int lensCount = items.getOrDefault("LensMakersGlasses", 0);
+        int missileCount = items.getOrDefault("AtGMissileMk1", 0);
+        boolean hasClover = items.containsKey("57LeafClover");
+
+        double lensBonus = Math.min(1.0, lensCount * 0.10);
+        double missileBonusPer = missileCount > 0 && hasClover ? 0.30 : 0.15;
+        double missileMultiplier = 1.0 + missileCount * missileBonusPer;
+        double playerDps = baseDps * (1.0 + lensBonus) * missileMultiplier;
 
         List<String> lines = new ArrayList<>();
         lines.add("Run Report");
@@ -81,8 +85,9 @@ public class InterpreterVisitor extends RoR2BaseVisitor<String> {
         lines.add("Enemy TTK Summary:");
         lines.add("------------------");
 
-        for (Database.Enemy enemy : Database.Enemy.values()) {
-            double enemyHp = enemy.getBaseHp() * (1 + (stage * 0.3) + (time * 0.05 * difficulty.getMultiplier()));
+        for (Database.Enemy enemy : Database.getEnemiesForStage(stage)) {
+            double enemyHp = enemy.getBaseHp() * (1.0 + ((stage - 1) * 0.15));
+            enemyHp *= difficulty.getMultiplier();
             if (artifacts.stream().anyMatch(a -> a.equalsIgnoreCase("Swarms"))) {
                 enemyHp /= 2.0;
             }
