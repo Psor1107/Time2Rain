@@ -1,0 +1,15 @@
+Run {
+    Survivor: Huntress
+    Difficulty: Rainstorm
+    Time: 35
+    Stage: 5
+
+    Items {
+        // AVISO SEMÂNTICO: Mais de 10 óculos de crítico
+        12 x LensMakersGlasses 
+        
+        // ERRO SEMÂNTICO: O jogo só permite 1 equipamento ativo
+        1 x ExecutiveCard
+        1 x ExecutiveCard
+    }
+}

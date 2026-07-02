@@ -1,0 +1,12 @@
+Run {
+    Survivor: Commando
+    Difficulty: Drizzle
+    Time: 10
+    Stage: 1
+    Artifacts: [Command, Swarms]
+
+    Items {
+        2 x LensMakersGlasses
+        1 x AtGMissileMk1
+    }
+}

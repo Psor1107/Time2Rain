@@ -2,6 +2,9 @@ package com.ror2;
 
 import java.util.List;
 
+// Alguns valores mockados, porem em sua maioria com base nos dados reais
+// ou uma tentativa de simula-los. Alguns valores podem ser ajustados posteriormente para melhor refletir a realidade do jogo.
+
 public final class Database {
     public enum Survivor {
         Commando(12.0),

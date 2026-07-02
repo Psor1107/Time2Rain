@@ -1,0 +1,29 @@
+Run {
+    Survivor: Huntress
+    Difficulty: Rainstorm
+    Time: 120
+    Stage: 20
+    Artifacts: [Swarms]
+
+    let multiplicador_dano = 1
+    let god_run = 0
+
+    if (Stage >= 10) {
+        // Variável exclusiva deste bloco
+        let status_avancado = 1
+        
+        if (status_avancado == 1 and Time > 100) {
+            // Escopo nível 3
+            god_run = 1
+            multiplicador_dano = 3
+        }
+    }
+
+    if (god_run == 1) {
+        // AVISO ESPERADO: Mais de 10 LensMakersGlasses
+        (multiplicador_dano * 5) x LensMakersGlasses
+        (multiplicador_dano * 10) x AtGMissileMk1
+        
+        1 x LeafClover
+    }
+}

@@ -1,0 +1,26 @@
+Run {
+    Survivor: Commando
+    Difficulty: Monsoon
+    Time: 50
+    Stage: 6
+    Artifacts: [Command]
+
+    let nivel_ameaca = (Stage * 2) + (Time / 10)
+    let taxa_sobrevivencia = 100
+    
+    // Bloco 1: Avaliação de matemática com variáveis nativas e locais
+    if (nivel_ameaca >= 15 and Time <= 60) {
+        let mitigacao = 5
+        taxa_sobrevivencia = taxa_sobrevivencia - (nivel_ameaca * 2)
+        
+        mitigacao x AtGMissileMk1
+    }
+
+    // Bloco 2: Acúmulo de inventário (somando itens com o Bloco 1)
+    if (taxa_sobrevivencia > 50 or Stage == 6) {
+        let loot_extra = 3
+        
+        loot_extra x LensMakersGlasses
+        (loot_extra * 2) x AtGMissileMk1
+    }
+}

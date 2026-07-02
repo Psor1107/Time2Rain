@@ -1,0 +1,14 @@
+Run {
+    Survivor: Huntress
+    Difficulty: Rainstorm
+    Time: 30
+    Stage: 4
+
+    let baus_verdes = 3
+    let multiplicador = 2
+
+    Items {
+        10 x LensMakersGlasses
+        baus_verdes * multiplicador x AtGMissileMk1
+    }
+}

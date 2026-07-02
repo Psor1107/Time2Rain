@@ -1,0 +1,10 @@
+Run {
+    Survivor: Huntress
+    Difficulty: Drizzle
+    Time: 15
+    Stage: 2
+
+    let moedas = 50
+    
+    let moedas = 100 
+}

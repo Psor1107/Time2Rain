@@ -1,0 +1,12 @@
+Run {
+    Survivor: Commando
+    Difficulty: Drizzle
+    Time: 10
+    Stage: 1
+
+    let base_dano = 100
+    let multiplicador_nulo = 0
+
+    // ERRO SEMÂNTICO: Divisão por zero
+    let quebra_sistema = base_dano / multiplicador_nulo
+}

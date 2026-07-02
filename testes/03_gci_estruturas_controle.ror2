@@ -1,0 +1,13 @@
+Run {
+    Survivor: Commando
+    Difficulty: Monsoon
+    Time: 45
+    Stage: 5
+
+    let sorte = 10
+
+    if (sorte > 5 and Stage == 5) {
+        let bnus = 2
+        bnus * 5 x LensMakersGlasses
+    }
+}

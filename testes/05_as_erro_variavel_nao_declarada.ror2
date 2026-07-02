@@ -1,0 +1,17 @@
+Run {
+    Survivor: Commando
+    Difficulty: Monsoon
+    Time: 20
+    Stage: 3
+
+    // ERRO SEMÂNTICO: Tentando atribuir valor a algo não declarado
+    dano_extra = 20 
+
+    if (Stage == 3) {
+        let vida_local = 100
+        1 x AtGMissileMk1
+    }
+
+    // ERRO SEMÂNTICO: vida_local morreu no fim do bloco 'if' anterior
+    let calculo = vida_local + 10
+}

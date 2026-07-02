@@ -1,0 +1,15 @@
+Run {
+    // ERRO SEMÂNTICO: Sobrevivente não reconhecido
+    Survivor: Acrid 
+    
+    // ERRO SEMÂNTICO: Dificuldade não reconhecida
+    Difficulty: Typhon 
+    
+    Time: 10
+    Stage: 1
+
+    Items {
+        // ERRO SEMÂNTICO: Item não reconhecido
+        1 x Ukulele 
+    }
+}
