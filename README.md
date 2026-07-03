@@ -121,3 +121,6 @@ java -jar target\riskylang-1.0.0-jar-with-dependencies.jar testes\01_als_basico.
 ```
 
 Após a execução bem-sucedida, abra o arquivo `testes_saida\out.txt` para visualizar o relatório gerado pela simulação. Caso o script contenha erros sintáticos ou semânticos, a execução será interrompida e os detalhes da falha serão exibidos no próprio arquivo de saída.
+
+### [Vídeo demonstração](https://drive.google.com/file/d/1KyLY6M5uHG43ieUXACyqZQujlL3YHvTA/view?usp=sharing)
+
